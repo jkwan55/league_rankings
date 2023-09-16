@@ -1,0 +1,180 @@
+esports-data/leagues.json written
+esports-data/tournaments.json written
+esports-data/players.json written
+esports-data/teams.json written
+esports-data/mapping_data.json written
+Processing nacl_qualifiers_2_summer_2023
+games/ESPORTSTMNT03:3196037.json written
+games/ESPORTSTMNT03:3196049.json written
+games/ESPORTSTMNT03:3196058.json written
+games/ESPORTSTMNT03:3197014.json written
+games/ESPORTSTMNT03:3198185.json written
+games/ESPORTSTMNT03:3200156.json written
+games/ESPORTSTMNT03:3199178.json written
+games/ESPORTSTMNT03:3198199.json written
+games/ESPORTSTMNT03:3200168.json written
+games/ESPORTSTMNT03:3198544.json written
+----- Processed 10 games, current run time:                                    0.24 minutes
+games/ESPORTSTMNT03:3198546.json written
+games/ESPORTSTMNT03:3195064.json written
+games/ESPORTSTMNT03:3196051.json written
+games/ESPORTSTMNT03:3196057.json written
+ESPORTSTMNT03:3196057 110733838936446954 not found in the mapping table
+games/ESPORTSTMNT03:3197025.json written
+games/ESPORTSTMNT03:3198183.json written
+games/ESPORTSTMNT03:3199172.json written
+games/ESPORTSTMNT03:3198196.json written
+games/ESPORTSTMNT03:3200165.json written
+games/ESPORTSTMNT03:3198206.json written
+----- Processed 20 games, current run time:                                    0.47 minutes
+games/ESPORTSTMNT03:3198553.json written
+games/ESPORTSTMNT03:3199526.json written
+games/ESPORTSTMNT03:3199528.json written
+games/ESPORTSTMNT03:3195262.json written
+games/ESPORTSTMNT03:3197195.json written
+games/ESPORTSTMNT03:3197205.json written
+games/ESPORTSTMNT03:3195300.json written
+games/ESPORTSTMNT03:3198294.json written
+games/ESPORTSTMNT03:3199274.json written
+games/ESPORTSTMNT03:3198298.json written
+----- Processed 30 games, current run time:                                    0.73 minutes
+games/ESPORTSTMNT03:3198299.json written
+games/ESPORTSTMNT03:3200543.json written
+games/ESPORTSTMNT03:3199525.json written
+games/ESPORTSTMNT03:3197182.json written
+games/ESPORTSTMNT03:3195276.json written
+games/ESPORTSTMNT03:3195306.json written
+games/ESPORTSTMNT03:3196275.json written
+games/ESPORTSTMNT03:3198292.json written
+games/ESPORTSTMNT03:3198296.json written
+ESPORTSTMNT03:3198296 110733838936447001 not found in the mapping table
+ESPORTSTMNT03:3198296 110733838936447002 not found in the mapping table
+games/ESPORTSTMNT03:3200536.json written
+----- Processed 40 games, current run time:                                    0.96 minutes
+games/ESPORTSTMNT03:3200539.json written
+games/ESPORTSTMNT03:3199520.json written
+games/ESPORTSTMNT03:3198611.json written
+games/ESPORTSTMNT03:3200605.json written
+games/ESPORTSTMNT03:3198621.json written
+games/ESPORTSTMNT03:3200613.json written
+games/ESPORTSTMNT03:3200614.json written
+games/ESPORTSTMNT03:3198612.json written
+games/ESPORTSTMNT03:3200607.json written
+games/ESPORTSTMNT03:3200609.json written
+----- Processed 50 games, current run time:                                    1.21 minutes
+games/ESPORTSTMNT03:3198622.json written
+games/ESPORTSTMNT03:3198623.json written
+games/ESPORTSTMNT03:3198727.json written
+games/ESPORTSTMNT03:3198737.json written
+games/ESPORTSTMNT03:3199703.json written
+games/ESPORTSTMNT03:3198740.json written
+games/ESPORTSTMNT03:3200718.json written
+games/ESPORTSTMNT03:3198741.json written
+games/ESPORTSTMNT03:3198743.json written
+games/ESPORTSTMNT03:3200722.json written
+----- Processed 60 games, current run time:                                    1.48 minutes
+games/ESPORTSTMNT03:3198744.json written
+Processing gll_summer_2023
+games/ESPORTSTMNT01:3383508.json written
+games/ESPORTSTMNT03:3166207.json written
+games/ESPORTSTMNT03:3166463.json written
+games/ESPORTSTMNT01:3369750.json written
+games/ESPORTSTMNT01:3373407.json written
+games/ESPORTSTMNT03:3166786.json written
+games/ESPORTSTMNT01:3385039.json written
+games/ESPORTSTMNT01:3370824.json written
+games/ESPORTSTMNT03:3165797.json written
+----- Processed 70 games, current run time:                                    1.72 minutes
+games/ESPORTSTMNT03:3167447.json written
+games/ESPORTSTMNT01:3383851.json written
+games/ESPORTSTMNT01:3374235.json written
+games/ESPORTSTMNT03:3167097.json written
+games/ESPORTSTMNT01:3382983.json written
+games/ESPORTSTMNT03:3165885.json written
+games/ESPORTSTMNT03:3166491.json written
+games/ESPORTSTMNT01:3383466.json written
+games/ESPORTSTMNT01:3372328.json written
+games/ESPORTSTMNT01:3373365.json written
+----- Processed 80 games, current run time:                                    1.96 minutes
+games/ESPORTSTMNT01:3382512.json written
+games/ESPORTSTMNT03:3166149.json written
+games/ESPORTSTMNT01:3369698.json written
+games/ESPORTSTMNT03:3166123.json written
+games/ESPORTSTMNT01:3385015.json written
+games/ESPORTSTMNT01:3384405.json written
+games/ESPORTSTMNT01:3371651.json written
+games/ESPORTSTMNT03:3165840.json written
+games/ESPORTSTMNT03:3167347.json written
+games/ESPORTSTMNT01:3390879.json written
+----- Processed 90 games, current run time:                                    2.21 minutes
+games/ESPORTSTMNT03:3185548.json written
+games/ESPORTSTMNT03:3184143.json written
+games/ESPORTSTMNT03:3176620.json written
+games/ESPORTSTMNT03:3176286.json written
+games/ESPORTSTMNT03:3180760.json written
+games/ESPORTSTMNT01:3389698.json written
+games/ESPORTSTMNT03:3174697.json written
+ESPORTSTMNT03:3174697 110428723805336981 not found in the mapping table
+games/ESPORTSTMNT03:3185169.json written
+games/ESPORTSTMNT01:3390584.json written
+games/ESPORTSTMNT03:3176207.json written
+----- Processed 100 games, current run time:                                    2.47 minutes
+games/ESPORTSTMNT03:3185523.json written
+games/ESPORTSTMNT01:3390621.json written
+games/ESPORTSTMNT03:3182799.json written
+games/ESPORTSTMNT03:3185130.json written
+games/ESPORTSTMNT01:3391036.json written
+games/ESPORTSTMNT03:3176234.json written
+games/ESPORTSTMNT03:3176263.json written
+games/ESPORTSTMNT01:3389839.json written
+games/ESPORTSTMNT03:3184549.json written
+games/ESPORTSTMNT03:3174629.json written
+----- Processed 110 games, current run time:                                    2.73 minutes
+games/ESPORTSTMNT03:3183492.json written
+games/ESPORTSTMNT01:3388808.json written
+games/ESPORTSTMNT01:3390833.json written
+games/ESPORTSTMNT03:3176526.json written
+games/ESPORTSTMNT03:3182739.json written
+games/ESPORTSTMNT03:3184119.json written
+games/ESPORTSTMNT03:3191737.json written
+games/ESPORTSTMNT03:3190842.json written
+games/ESPORTSTMNT03:3189910.json written
+games/ESPORTSTMNT03:3191822.json written
+----- Processed 120 games, current run time:                                    2.99 minutes
+games/ESPORTSTMNT03:3190919.json written
+games/ESPORTSTMNT06:2822208.json written
+games/ESPORTSTMNT06:2822219.json written
+games/ESPORTSTMNT06:2822222.json written
+games/ESPORTSTMNT03:3195550.json written
+games/ESPORTSTMNT03:3195570.json written
+games/ESPORTSTMNT03:3197538.json written
+games/ESPORTSTMNT03:3195598.json written
+games/ESPORTSTMNT01:3407892.json written
+games/ESPORTSTMNT01:3409803.json written
+----- Processed 130 games, current run time:                                    3.23 minutes
+games/ESPORTSTMNT01:3409822.json written
+games/ESPORTSTMNT01:3408868.json written
+games/ESPORTSTMNT01:3409862.json written
+Processing elite_series_summer_2023
+games/ESPORTSTMNT04:2683951.json written
+games/ESPORTSTMNT04:2684716.json written
+games/ESPORTSTMNT04:2683305.json written
+games/ESPORTSTMNT04:2685161.json written
+games/ESPORTSTMNT03:3165542.json written
+games/ESPORTSTMNT04:2687267.json written
+games/ESPORTSTMNT06:2815913.json written
+----- Processed 140 games, current run time:                                    3.47 minutes
+games/ESPORTSTMNT04:2683130.json written
+games/ESPORTSTMNT06:2815885.json written
+games/ESPORTSTMNT04:2683276.json written
+games/ESPORTSTMNT04:2687281.json written
+games/ESPORTSTMNT04:2683788.json written
+games/ESPORTSTMNT03:3167423.json written
+games/ESPORTSTMNT04:2687237.json written
+games/ESPORTSTMNT03:3166521.json written
+games/ESPORTSTMNT04:2685298.json written
+games/ESPORTSTMNT06:2817904.json written
+----- Processed 150 games, current run time:                                    3.74 minutes
+games/ESPORTSTMNT04:2683967.json written
+games/ESPORTSTMNT04:2685748.json written
+games

@@ -5,13 +5,13 @@ import shutil
 import time
 import os
 from io import BytesIO
-from save_into_db import open_game
-
+from game_obj import open_game
+from save_db import save_stage, save_tournament, get_recorded
 
 S3_BUCKET_URL = "https://power-rankings-dataset-gprhack.s3.us-west-2.amazonaws.com"
 
 directory = "games"
-wanted_keys = ["participantID", "teamID", "goldStats", "championName", "playerName", "totalGold", "stats", "goldPerSecond"]
+# wanted_keys = ["participantID", "teamID", "goldStats", "championName", "playerName", "totalGold", "stats", "goldPerSecond"]
 
 def grab_players():
     """ Function to grab all players"""
@@ -22,11 +22,16 @@ def grab_players():
             player_list[player['handle'].lower()] = {'id': player['player_id'], 'playerName': player['handle']}
     return player_list
 
-def create_filtered_file(game_file, idx, start_date, player_list, tournament_id, stage_slug):
+
+def create_filtered_file(game_file, idx, start_date, player_list, tournament_id, stage_slug, game_name):
+    """ Function to grab events out of game file """
     event_10 = {}
     event_20 = {}
     game_end = {}
 
+    if not game_file:
+        print(f'game obj not given {game_name}')
+        return None
     for event in game_file:
         if event['eventType'] == 'game_end':
             game_end = event
@@ -142,35 +147,39 @@ def download_games(player_list):
 
     game_counter = 0
     all_games_data = {}
+    recorded_tournaments = [recorded_game.tournament_name for recorded_game in get_recorded()]
     for tournament in tournaments_data:
         start_date = tournament.get("startDate", "")
-        if start_date.startswith(str(2022)) or start_date.startswith(str(2023)):
-            if tournament['slug'] == 'lcs_summer_2022' or tournament['slug'] == 'lcs_summer_2023':
-                print(f"Processing {tournament['slug']}")
-                for stage in tournament["stages"]:
-                    save_stage_data = []
-                    for section in stage["sections"]:
-                        for match in section["matches"]:
-                            for game in match["games"]:
-                                if game["state"] == "completed":
-                                    try:
-                                        platform_game_id = mappings[game["id"]]["platformGameId"]
-                                    except KeyError:
-                                        print(f"{platform_game_id} {game['id']} not found in the mapping table")
-                                        continue
-                                    
-                                    file_to_download = f"{directory}/{platform_game_id}"
-                                    game_file = download_gzip_and_write_to_json(file_to_download)                                    
-                                    save_stage_data.append(create_filtered_file(game_file, game_counter, start_date, player_list, tournament['id'], stage['slug']))
-                                    game_counter += 1
+        # if start_date.startswith(str(2022)) or start_date.startswith(str(2023)):
+            # if tournament['slug'] == 'lcs_summer_2022': #or tournament['slug'] == 'lcs_summer_2023':
+        if tournament['slug'] not in recorded_tournaments:
+            print(f"Processing {tournament['slug']}")
+            for stage in tournament["stages"]:
+                save_stage_data = []
+                for section in stage["sections"]:
+                    for match in section["matches"]:
+                        for game in match["games"]:
+                            if game["state"] == "completed":
+                                try:
+                                    platform_game_id = mappings[game["id"]]["platformGameId"]
+                                except KeyError:
+                                    print(f"{platform_game_id} {game['id']} not found in the mapping table")
+                                    continue
+                                
+                                file_to_download = f"{directory}/{platform_game_id}"
+                                game_file = download_gzip_and_write_to_json(file_to_download)
+                                save_obj = create_filtered_file(game_file, game_counter, start_date, player_list, tournament['id'], stage['slug'], platform_game_id)
+                                if save_obj:
+                                    save_stage_data.append(save_obj)
+                                game_counter += 1
 
-                                if game_counter % 10 == 0:
-                                    print(
-                                        f"----- Processed {game_counter} games, current run time: \
-                                        {round((time.time() - start_time)/60, 2)} minutes"
-                                    )
-                    save_into_db(save_stage_data)
-
+                            if game_counter % 10 == 0:
+                                print(
+                                    f"----- Processed {game_counter} games, current run time: \
+                                    {round((time.time() - start_time)/60, 2)} minutes"
+                                )
+                save_stage(save_stage_data)
+                save_tournament(tournament['id'], tournament['slug'])
 
 
 if __name__ == "__main__":

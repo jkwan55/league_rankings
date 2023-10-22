@@ -17,6 +17,59 @@ def get_recorded():
     return RecordedTournaments.objects.all()
 
 
+def get_all():
+    return PlayerStats.objects.all()
+
+
+def update_teams(team_id, players, tournament_id, all_objs, missing_players):
+    # needs to check and remove from list, but wip
+    for player in players:
+        if 'id' in player and (tournament_id, player['id']) in missing_players:
+            print('found', player['id'])
+            filtered_objs = all_objs.filter(tournament_id=tournament_id, player_id=player['id'])
+            filtered_objs.update(team_id=team_id)
+            if 'role' in player:
+                filtered_objs.update(role=player['role'])
+
+
+def update_teams2(game_file, tournament_id, teams, missing_players, player_list):
+    
+    event_update = {}
+
+    if not game_file:
+        print(f'game obj not given {game_name}')
+        return None
+    for event in game_file:
+        if event["eventType"] == "stats_update":
+            event_update = event
+            break
+
+    participants = event_update['participants']
+    for participant in participants:
+        name = ''
+        if 'playerName' in participant:
+            name = participant['playerName'].split(" ")
+        elif 'summonerName' in participant:
+            name = participant['summonerName'].split(" ")
+        else:
+            pass
+        if len(name) > 1:
+            name = name[1:]
+        name = ' '.join(name).lower()
+        if name in player_list:
+            player_id = player_list[name]['id']
+            if (tournament_id, player_id) in missing_players:
+                update_player = PlayerStats.objects.filter(tournament_id=tournament_id, player_id=player_id, team_id__isnull=True)
+                if update_player:
+                    if participant['teamID']:
+                        update_player.update(team_id=teams[0]["id"])
+                        # print('blue',teams[0]['id'])
+                    else:
+                        # print('red',teams[1]['id'])
+                        update_player.update(team_id=teams[1]["id"])
+
+
+
 def save_stage(stage_data):
     new_obj = {}
     do_once = ['tournament_id', 'stage_slug', 'player_name', 'player_id', 'start_date']

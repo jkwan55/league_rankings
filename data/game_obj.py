@@ -4,7 +4,7 @@ import json
 # commented out lines may be for low memory VMs
 
 # def open_game():
-def open_game(event_10, event_20, game_end, player_list, start_date, tournament_id, stage_slug):
+def open_game(event_10, event_20, game_end, player_list, start_date, tournament_id, stage_slug, team_ids):
     """Function to open games and put into database"""
 
     # add tournament and startDate to keep track of time
@@ -18,11 +18,13 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
     #     for player in players:
     #         player_list[player['handle'].lower()] = {'id': player['player_id'], 'playerName': player['handle']}
         
-    def game_updates(obj, time, teams, missing_end, start_date, tournament_id, stage_slug, player_list):
+    def game_updates(obj, time, teams, missing_end, start_date, tournament_id, stage_slug, player_list, team_ids):
         # if missing_end:
         #     teams = {}
         #     teams[100] = {}
         #     teams[200] = {}
+        blue_team = team_ids[0] if team_ids[0]["side"] == "blue" else team_ids[1]
+        red_team = team_ids[0] if team_ids[0]["side"] == "red" else team_ids[1]
 
         # grab tower stats
         for team in obj['teams']:
@@ -36,6 +38,7 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
         participants = obj['participants']
         game_id = obj['platformGameId']
         for participant in participants:
+            team_id = blue_team["id"] if participant['teamID'] == 100 else red_team["id"]
             name = ''
             if 'playerName' in participant:
                 name = participant['playerName'].split(" ")
@@ -84,7 +87,7 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
                 # make sure to calculate win and lose time only once, some games dont last 20mins
                 if time == 10 and not missing_end:
                     # add win_time and count for Win Rate
-                    if 'winner' in teams[participant['teamID']]:
+                    if 'winner' in teams[participant['teamID']] and teams[participant['teamID']]['winner']:
                         all_game_data[player_id]['win_time'] = \
                             teams[participant['teamID']]['gameTime'] + (all_game_data[player_id]['win_time'] \
                                 if 'win_time' in all_game_data[player_id] else 0)
@@ -94,7 +97,7 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
                                 if 'win_count' in all_game_data[player_id] else 0)
                         
                     # do the same for lost games
-                    else:
+                    elif 'winner' in teams[participant['teamID']] and not teams[participant['teamID']]['winner']:
                         all_game_data[player_id]['lost_time'] = \
                             teams[participant['teamID']]['gameTime'] + (all_game_data[player_id]['lost_time'] \
                                 if 'lost_time' in all_game_data[player_id] else 0)
@@ -109,15 +112,16 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
                 all_game_data[player_id]['stage_slug'] = stage_slug
                 all_game_data[player_id]['player_name'] = name
                 all_game_data[player_id]['player_id'] = player_id
+                all_game_data[player_id]['team_id'] = team_id
                 all_game_data [player_id][f'gold_{time}'] = participant['totalGold']
                 all_game_data[player_id][f'gold_{time}_count'] = 1
                 all_game_data[player_id][f'tower_delta_{time}'] = teams[participant['teamID']][f'tower_delta_{time}']
                 all_game_data[player_id][f'tower_delta_{time}_count'] = 1
                 if time == 10 and not missing_end:
-                    if 'winner' in teams[participant['teamID']]:
+                    if 'winner' in teams[participant['teamID']] and teams[participant['teamID']]['winner']:
                         all_game_data[player_id]['win_time'] = teams[participant['teamID']]['gameTime']
                         all_game_data[player_id]['win_count'] = 1
-                    else:
+                    elif 'winner' in teams[participant['teamID']] and not teams[participant['teamID']]['winner']:
                         all_game_data[player_id]['lost_time'] = teams[participant['teamID']]['gameTime']
                         all_game_data[player_id]['lost_count'] = 1
 
@@ -132,9 +136,9 @@ def open_game(event_10, event_20, game_end, player_list, start_date, tournament_
         teams[100] = {}
         teams[200] = {}
     if event_10:
-        game_updates(event_10, 10, teams, False if game_end else True, start_date, tournament_id, stage_slug, player_list)
+        game_updates(event_10, 10, teams, False if game_end else True, start_date, tournament_id, stage_slug, player_list, team_ids)
     if event_20:
-        game_updates(event_20, 20, teams, False if game_end else True, start_date, tournament_id, stage_slug, player_list)
+        game_updates(event_20, 20, teams, False if game_end else True, start_date, tournament_id, stage_slug, player_list, team_ids)
     
     return all_game_data
 

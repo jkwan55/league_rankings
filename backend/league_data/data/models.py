@@ -27,6 +27,10 @@ class PlayerStats(models.Model):
     win_count = models.IntegerField(blank=True, null=True)
     lost_time = models.PositiveBigIntegerField(blank=True, null=True)
     lost_count = models.IntegerField(blank=True, null=True)
+    team_id = models.PositiveBigIntegerField(blank=True, null=True)
+    role = models.CharField(max_length=200, blank=True, null=True)
+    team_name = models.CharField(max_length=200, blank=True, null=True)
+
 
     class Meta:
         db_table = 'player_stats'
@@ -38,3 +42,12 @@ class RecordedTournaments(models.Model):
 
     class Meta:
         db_table = 'recorded_tournaments'
+
+
+class FeatureWeights(models.Model):
+    weight_id = models.BigAutoField(unique=True, primary_key=True)
+    weight_name = models.CharField(max_length=100, blank=True, null=True)
+    weight_value = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'feature_weights'

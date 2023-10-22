@@ -6,7 +6,7 @@ import time
 import os
 from io import BytesIO
 from game_obj import open_game
-from save_db import save_stage, save_tournament, get_recorded
+from save_db import save_stage, save_tournament, get_recorded, update_teams, get_all, update_teams2
 
 S3_BUCKET_URL = "https://power-rankings-dataset-gprhack.s3.us-west-2.amazonaws.com"
 
@@ -23,7 +23,7 @@ def grab_players():
     return player_list
 
 
-def create_filtered_file(game_file, idx, start_date, player_list, tournament_id, stage_slug, game_name):
+def create_filtered_file(game_file, idx, start_date, player_list, tournament_id, stage_slug, game_name, team_id):
     """ Function to grab events out of game file """
     event_10 = {}
     event_20 = {}
@@ -42,7 +42,7 @@ def create_filtered_file(game_file, idx, start_date, player_list, tournament_id,
         if event_10 and event_20 and game_end:
             break
 
-    return open_game(event_10, event_20, game_end, player_list, start_date, tournament_id, stage_slug)
+    return open_game(event_10, event_20, game_end, player_list, start_date, tournament_id, stage_slug, team_id)
     
     # FOR LOW MEMORY VMs: read character a time in case memory load is too high
     """
@@ -147,17 +147,22 @@ def download_games(player_list):
 
     game_counter = 0
     all_games_data = {}
-    recorded_tournaments = [recorded_game.tournament_name for recorded_game in get_recorded()]
+    # recorded_tournaments = [recorded_game.tournament_name for recorded_game in get_recorded()]
+    all_objs = get_all()
+    missing_tournaments = set([str(player_stats.tournament_id) for player_stats in all_objs])
+    missing_players = [(str(player_stats.tournament_id), str(player_stats.player_id)) for player_stats in all_objs]
     for tournament in tournaments_data:
         start_date = tournament.get("startDate", "")
         # if start_date.startswith(str(2022)) or start_date.startswith(str(2023)):
             # if tournament['slug'] == 'lcs_summer_2022': #or tournament['slug'] == 'lcs_summer_2023':
-        if tournament['slug'] not in recorded_tournaments:
+        # if tournament['slug'] not in recorded_tournaments:
+        if tournament['id'] in ['110825936250664572', '110428848766564346']:
             print(f"Processing {tournament['slug']}")
             for stage in tournament["stages"]:
                 save_stage_data = []
                 for section in stage["sections"]:
                     for match in section["matches"]:
+                        # update team_id into dict then save
                         for game in match["games"]:
                             if game["state"] == "completed":
                                 try:
@@ -168,7 +173,16 @@ def download_games(player_list):
                                 
                                 file_to_download = f"{directory}/{platform_game_id}"
                                 game_file = download_gzip_and_write_to_json(file_to_download)
-                                save_obj = create_filtered_file(game_file, game_counter, start_date, player_list, tournament['id'], stage['slug'], platform_game_id)
+                        #         update_teams2(game_file, tournament['id'], match['teams'], missing_players, player_list)
+                # save into db (missing team_id, lost_time incorrect)
+                #         if match["state"] == "completed":
+                #             for team in match["teams"]:
+                #                 if team['players']:
+                #                     team_id = team["id"]
+                #                     players = team["players"]
+                #                     update_teams(team_id, players, tournament['id'], all_objs, missing_players)
+                # add team logic to create_filtered_file
+                                save_obj = create_filtered_file(game_file, game_counter, start_date, player_list, tournament['id'], stage['slug'], platform_game_id, match['teams'])
                                 if save_obj:
                                     save_stage_data.append(save_obj)
                                 game_counter += 1

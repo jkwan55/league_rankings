@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w!lc!0m49qp#5u)fz8bvio$%qo_cy#*j=4bd#m9apc5zl4p4o*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', '54.193.47.8']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', '54.193.47.8', 'ec2-54-193-47-8.us-west-1.compute.amazonaws.com', 'http://54.193.47.8/']
 
 
 # Application definition
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'data'
+    'data',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'league_data.urls'
@@ -124,3 +127,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1',
+    'http://0.0.0.0',
+    'http://localhost:5173',
+    'http://ec2-54-193-47-8.us-west-1.compute.amazonaws.com',
+    'http://54.193.47.8'
+]

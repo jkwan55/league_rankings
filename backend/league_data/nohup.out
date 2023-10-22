@@ -1,0 +1,22 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 22, 2023 - 02:09:52
+Django version 4.2.5, using settings 'league_data.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 22, 2023 - 02:09:59
+Django version 4.2.5, using settings 'league_data.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Bad Request: /league_rankings/team/
+[22/Oct/2023 02:10:21] "POST /league_rankings/team/ HTTP/1.1" 400 16
+[22/Oct/2023 02:10:22] "POST /league_rankings/global/ HTTP/1.1" 200 397
+[22/Oct/2023 02:10:22] "POST /league_rankings/global/ HTTP/1.1" 200 397

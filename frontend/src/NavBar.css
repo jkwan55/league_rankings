@@ -1,0 +1,13 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    background: #ef9a9a;
+}
+
+.nav-child {
+    display: flex;
+}
+
+.last-child {
+    padding-right: 40px;
+}

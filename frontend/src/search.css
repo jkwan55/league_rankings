@@ -1,0 +1,23 @@
+.searchbar-area {
+    height: 45px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 40px);
+}
+
+.searchbar {
+    display: flex;
+    flex-grow: 1;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin: 20px;
+    display: flex;
+}

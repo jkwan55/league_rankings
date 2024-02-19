@@ -1,5 +1,5 @@
 # league_rankings
-website: http://ec2-54-193-47-8.us-west-1.compute.amazonaws.com/
+website: ~~http://ec2-54-193-47-8.us-west-1.compute.amazonaws.com/~~
 ## Inspiration
   Hackathon to rank league of legends teams. I feel like I have worked on something similar and worked toward the same approach.
 ## What it does
